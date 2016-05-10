@@ -1,0 +1,35 @@
+<h3>Rainbowmon Drops</h3>
+<table id="log-compare-table-<%= drop %>" class="logtable table table-striped table-bordered" style='display: table'>
+  <thead>
+    <tr>
+      <th rowspan="2">Stage</th>
+      <th rowspan="2">Runs</th>
+      <td colspan="2" width="25%">Level 3*</td>
+      <td colspan="2" width="25%">Level 2*</td>
+      <td colspan="2" width="25%">Level 1*</td>
+    </tr>
+    <tr>
+      <td>#</td>
+      <td>%</td>
+      <td>#</td>
+      <td>%</td>
+      <td>#</td>
+      <td>%</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statistics.each do |scenario, data| %>
+      <% next if data[:totals][:rewards][drop.titleize].blank? %>
+      <tr>
+        <th><%= scenario.to_s %></th>
+        <th><%= number_with_delimiter(data[:totals][:runs]) %>
+
+        <% 3.times.each do |i| %>
+          <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize][3-i].try(:[], :count)) %></td>
+          <td><%= number_to_percentage(data[:totals][:rewards][drop.titleize][3-i].try(:[], :average), precision: 2) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

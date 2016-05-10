@@ -1,0 +1,69 @@
+/*
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ */
+.dataTables_wrapper {
+  font-size: 0.9em;
+  .dataTables_paginate {
+    .paginate_button {
+      padding: 0;
+      &:hover {
+        border: 1px solid #efefef;
+        background: none;
+      }
+    }
+  }
+  table.dataTable {
+    width: 100% !important;
+    border: 1px solid #c8c8c8;
+    thead .sorting:after, thead .sorting_asc:after, thead .sorting_desc:after {
+      display: none;
+    }
+    tbody {
+      tr.even {
+        background-color: #f8f8f8;
+      }
+    }
+    thead {
+      border-bottom: 1px solid #999;
+      th {
+        text-align: center;
+        font-size: 1.15em;
+      }
+      td {
+        font-weight: bold;
+      }
+    }
+    thead th, thead td, tbody td {
+      border: 1px solid #e8e8e8;
+    }
+    tfoot th, tfoot td {
+      border-top: 1px solid #d8d8d8;
+    }
+    td.sorting_asc, td.sorting_desc, td.sorting_1 {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+}
+.rune-details {
+  .primary {
+    font-weight: bold;
+    color: red;
+  }
+  .innate { color: #47a; }
+  .secondary { color: #888; }
+}
+.stage {
+  font-weight: bold;
+  &.hell { color: #a33; }
+  &.hard { color: #f60; }
+  &.normal { color: #393; }
+  &.unknown { color: #333; }
+}
+
+.logtable { visibility: hidden; }
+#log-index-table {
+  min-height: 600px;
+}
+
+// td, th { border: 1px solid; }

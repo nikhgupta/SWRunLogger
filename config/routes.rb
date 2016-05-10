@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  get "/logs" => "logs#index", as: :logs
+  get "/compare" => "logs#compare", as: :compare
+  post "/import" => 'imports#create', as: :import
+
+  devise_for :users
+  # root to: "logs#index", as: :logs
+  root to: "high_voltage/pages#show", id: "home"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

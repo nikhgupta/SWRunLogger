@@ -1,0 +1,90 @@
+<table id="log-index-table" class='logtable' data-source="<%= logs_path(format: :json) %>">
+  <thead>
+    <tr class='main'>
+      <th rowspan="2" class='string primary'>Scenario</th>
+      <th colspan="2">Run Information</th>
+      <th colspan="4">Drops</th>
+      <th colspan="4">Rune</th>
+    </tr>
+    <tr>
+      <td class='datetime counter'>Run at</td>
+      <td class='duration'>Duration</td>
+      <%# <td class='boolean yesno'>Win?</td> %>
+      <td class='numeric int'>Mana</td>
+      <td class='numeric int'>Xtal</td>
+      <td class='numeric int'>Enrgy</td>
+      <td class='string'>Kind</td>
+      <td class='enum string'>Slot</td>
+      <td class='enum string'>Rarity</td>
+      <td class='numeric int'>Value</td>
+      <td class='numeric float percentage'>Efficiency</td>
+      <%# <td class='text'>Details</td> %>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr class='filters'>
+      <th>Scenario</th>
+      <th>Run at</th>
+      <th>Duration</th>
+      <%# <th>Win?</th> %>
+      <th>Mana</th>
+      <th>Xtal</th>
+      <th>Enrgy</th>
+      <th>Kind</th>
+      <th>Slot</th>
+      <th>Rarity</th>
+      <th>Value</th>
+      <th>Efficiency</th>
+      <%# <th>Details</th> %>
+    </tr>
+    <tr class='averages'>
+      <th>Averages:</th>
+      <th class='count'>Run at</th>
+      <th>Duration</th>
+      <%# <th>Win?</th> %>
+      <th>Mana</th>
+      <th>Xtal</th>
+      <th>Enrgy</th>
+      <th>Kind</th>
+      <th>Slot</th>
+      <th>Rarity</th>
+      <th>Value</th>
+      <th>Efficiency</th>
+      <%# <th>Details</th> %>
+    </tr>
+    <tr class='totals'>
+      <th>Totals:</th>
+      <th>Run at</th>
+      <th>Duration</th>
+      <%# <th>Win?</th> %>
+      <th>Mana</th>
+      <th>Xtal</th>
+      <th>Enrgy</th>
+      <th>Kind</th>
+      <th>Slot</th>
+      <th>Rarity</th>
+      <th>Value</th>
+      <th>Efficiency</th>
+      <%# <th>Details</th> %>
+    </tr>
+  </tfoot>
+  <tbody>
+    <%# <% @sprints.each_with_index do |sprint, i| %1> %>
+    <%#   <tr class="<%= i % 2 == 0 ? :odd : :even %1>"> %>
+    <%#     <td><%= sprint.scenario.to_s %1></td> %>
+    <%#     <td><%= sprint.started_at.strftime("%H:%M %b %e, %Y") %1></td> %>
+    <%#     <td><%= sprint.duration %1></td> %>
+    <%#     <1%# <td><%= sprint.win? ? "Yes" : "No" %2></td> %1> %>
+    <%#     <td><%= sprint.reward.mana %1></td> %>
+    <%#     <td><%= sprint.reward.crystal %1></td> %>
+    <%#     <td><%= sprint.reward.energy %1></td> %>
+    <%#     <td><%= sprint.reward.name %1></td> %>
+    <%#     <td><%= sprint.reward.rune.try(:slot) %1></td> %>
+    <%#     <td><%= sprint.reward.rune.try(:rarity) %1></td> %>
+    <%#     <td><%= number_with_delimiter(sprint.reward.rune.try(:sell_value)) %1></td> %>
+    <%#     <td><%= number_to_percentage(sprint.reward.rune.try(:efficiency), precision: 2) %1></td> %>
+    <%#     <td><del style='color: #999'>Soon</del></td> %>
+    <%#   </tr> %>
+    <%# <% end %1> %>
+  </tbody>
+</table>
