@@ -40,3 +40,4 @@ gem 'dropzonejs-rails'
 gem 'momentjs-rails'
 gem 'jquery-datatables-rails'
 
+gem 'postmark-rails', '~> 0.12.0'
