@@ -13,12 +13,18 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # gem 'bcrypt', '~> 3.1.7'
-# gem 'unicorn'
+gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   gem 'byebug'
   gem 'pry-rails'
+end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails'
 end
 
 group :development do
@@ -33,3 +39,4 @@ gem 'bootstrap-generators'
 gem 'dropzonejs-rails'
 gem 'momentjs-rails'
 gem 'jquery-datatables-rails'
+
