@@ -68,15 +68,17 @@ class CsvImportingService
   end
 
   def extract_reward_parameters(data)
-    type = "Rune" if data.drop.downcase == "rune"
+    # type = "Rune" if data.drop.downcase == "rune"
     if match = data.drop.match(/^(.*)\s+(\d+)\*$/)
       type, level, amount = match[1], match[2].to_i, 1
     elsif match = data.drop.match(/^(.*)\s+x(\d+)$/)
       type, level, amount = match[1], 0, match[2].to_i
     elsif data.drop.downcase == "rune"
       type, level, amount = "Rune", data[:rune_grade].to_i, 1
+    else
+      type, level, amount = data.drop, 0, 1
     end
-    type = type.parameterize("_").camelize
+    type = type.to_s.parameterize("_").camelize
 
     { type: type, amount: amount, level: level, mana: data.mana,
       crystal: data.crystal, energy: data.energy }
