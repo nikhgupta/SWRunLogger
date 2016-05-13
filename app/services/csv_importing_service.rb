@@ -8,11 +8,7 @@ class CsvImportingService
   end
 
   def run
-    begin
-      read_csv
-    rescue StandardError => e
-      return { "error" => "#{e.class}: #{e.message}" }
-    end
+    read_csv
 
     saved = errors = existing = 0
     total = data.count
@@ -29,14 +25,15 @@ class CsvImportingService
         begin
           ActiveRecord::Base.transaction{ result = import_sprint sprint }
           saved += 1
-        rescue RuntimeError => e
-          Rails.logger.warn "[ERROR]: #{e.message}"
+        rescue StandardError => e
+          Rails.logger.warn "[ERROR]: #{e.class} => #{e.message}"
           errors += 1
         end
       end
     end
 
     @import.update_attributes(saved: saved, faulty: errors, existing: existing)
+    @import.reload
   end
 
   private

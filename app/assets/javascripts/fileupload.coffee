@@ -41,16 +41,19 @@ ready = ->
       @on 'success', (file, message) =>
         $('.container-fluid').prepend(html) if $(".alert").length < 1
         $('.alert').removeClass('alert-danger').addClass('alert-success')
-        $('.alert').html(button + "File Imported Successfully!")
-        $('.alert').show('slow')
-        # $("#log-table").dataTable().api().ajax.reload()
-        # setTimeout (-> $('.alert').slideUp (-> $('.dropzone').hide())), 5000
-        window.location = '/logs'
+        html  = button + "#{message.total} Runs Imported Successfully!<br/>"
+        html += "#{message.saved} saved, while #{message.existing} runs were already imported."
+        html += " Failed to import #{message.faulty} runs!<br/>"
+        html += "Redirecting you to view logs in about 5 seconds!"
+        $('.alert').html(html).show('slow')
+        setTimeout (-> window.location = '/logs'), 5000
       @on 'error', (file, message) ->
         $('.container-fluid').prepend(html) if $(".alert").length < 1
         $('.alert').removeClass('alert-success').addClass('alert-danger')
-        $('.alert').html(button + "File could not be imported!")
-        $('.alert').show('slow')
+        html  = button + "File could not be imported!<br/>"
+        html += "Are you sure this is a valid CSV exported by SWProxy RunLogger?<br/>"
+        html += "Error encountered: #{message.error}"
+        $('.alert').html(html).show('slow')
         window.location = '/users/sign_in' if file.xhr.status is 401
 
 $(document).ready(ready)

@@ -6,11 +6,14 @@ class ImportsController < ApplicationController
   end
 
   def create
-    response = CsvImportingService.new(file: params['file'], user: current_user).run
-    if response && response.respond_to?(:has_key?) && response['error'].present?
-      render json: { error: response['error'] }, status: :unsupported_media_type
+    @import = CsvImportingService.new(file: params['file'], user: current_user).run
+
+    if @import.persisted?
+      render json: @import.to_json
     else
-      render nothing: true
+      render json: { error: "Import failed for some unknown reason!" }, status: :bad_request
     end
+  rescue StandardError => e
+    render json: { error: "#{e.class}: #{e.message}" }, status: :unsupported_media_type
   end
 end
