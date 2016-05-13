@@ -2,6 +2,7 @@ class ImportsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def index
+    @imports = Import.order(created_at: :desc).all
   end
 
   def create

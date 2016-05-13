@@ -1,7 +1,7 @@
 <% if current_user.present? %>
   <div class="row">
     <div class='col-sm-4'>
-      <%= form_tag import_path, class: "dropzone", id: "import-dropzone",
+      <%= form_tag new_import_path, class: "dropzone", id: "import-dropzone",
         multipart: true, authenticity_token: true, remote: true, multiple: true do %>
         <div class="fallback">
           <%= file_field_tag :files, multiple: true %><br>

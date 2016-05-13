@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Global Imports Log</h1>
+</div>
+
+<div class="table-responsive" id="imports-table">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Total Runs</th>
+        <th>Runs Saved</th>
+        <th>Existing Rows</th>
+        <th>Faulty Logs</th>
+        <th>Imported Around</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <th><%= @imports.pluck(:total).sum %></th>
+        <th><%= @imports.pluck(:saved).sum %></th>
+        <th><%= @imports.pluck(:existing).sum %></th>
+        <th><%= @imports.pluck(:faulty).sum %></th>
+        <th>--</th>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <%= content_tag_for(:tr, @imports) do |import| %>
+        <td><%= import.user %></td>
+        <td><%= import.saved %></td>
+        <td><%= import.existing %></td>
+        <td><%= import.faulty %></td>
+        <td><%= import.total %></td>
+        <td><%= time_ago_in_words(import.created_at) %> ago</td>
+        <%# <td><%= link_to 'Show', import %1></td> %>
+        <%# <td><%= link_to 'Edit', edit_import_path(import) %1></td> %>
+        <%# <td><%= link_to 'Destroy', import, method: :delete, data: { confirm: 'Are you sure?' } %1></td> %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  get "/logs" => "logs#index", as: :logs
-  get "/compare" => "logs#compare", as: :compare
-  post "/import" => 'imports#create', as: :import
+  get  "/logs" => "logs#index", as: :logs
+  get  "/compare" => "logs#compare", as: :compare
+
+  get  "/imports" => "imports#index",  as: :imports
+  post "/imports" => 'imports#create', as: :new_import
 
   devise_for :users
   # root to: "logs#index", as: :logs

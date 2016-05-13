@@ -36,6 +36,7 @@
           <li class='<%= :active if request.path == root_path %>'><%= link_to "Home", root_path %></li>
           <li class='<%= :active if request.path == logs_path %>'><%= link_to "Logs", logs_path %></li>
           <li class='<%= :active if request.path == compare_path %>'><%= link_to "Compare", compare_path %></li>
+          <li class='<%= :active if request.path == imports_path %>'><%= link_to "Imports", imports_path %></li>
           <li><a>|</a></li>
           <li><%= link_to "SWARFARM", "http://swarfarm.com", target: "_blank" %></li>
           <li><%= link_to "Optimizer", "http://swrunes.all.my", target: "_blank" %></li>
