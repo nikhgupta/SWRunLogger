@@ -22,7 +22,7 @@
       <% next if data[:totals][:rewards][drop.titleize].blank? %>
       <tr>
         <th><%= scenario.to_s %></th>
-        <th><%= number_with_delimiter(data[:totals][:runs]) %>
+        <th><%= number_with_delimiter(data[:totals][:runs]) %></th>
 
         <% 3.times.each do |i| %>
           <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize][3-i].try(:[], :count)) %></td>

@@ -8,6 +8,10 @@
             data-toggle="tab"><%= tab.titleize %></a>
         </li>
       <% end %>
+      <li role="presentation">
+        <a href="#miscelleneous" aria-controls="miscelleneous" role="tab"
+          data-toggle="tab">Scrolls/Stones</a>
+      </li>
     </ul>
   </div>
 
@@ -17,9 +21,12 @@
       <% @tabs.each do |kind, names| %>
         <% names.each_with_index do |name, i| %>
           <div role="tabpanel" class="tab-pane <%= :active if i == 0 && kind == :runes %>" id="<%= name %>">
-            <%= render partial: "logs/compare/#{kind}.html.erb", locals: { drop: name } %>
+            <%= render partial: "logs/compare/#{kind}.html.erb", locals: { drop: name, tabs: @tabs } %>
           </div>
         <% end %>
+        <div role="tabpanel" class="tab-pane" id="miscelleneous"">
+          <%= render partial: "logs/compare/miscelleneous.html.erb", locals: { drops: @miscelleneous } %>
+        </div>
       <% end %>
     </div>
   </div>

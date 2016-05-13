@@ -17,13 +17,12 @@ class LogsController < ApplicationController
         violent focus guard endure shield revenge
         rage will nemesis vampire destroy
       ),
-      drops: %w(
-        rainbowmon
-      )
-      # miscelleneous: %w(
-      #   unknown_scroll summoning_stones shapeshift_stone
-      # )
+      drops: %w( rainbowmon),
     }
+    @miscelleneous = %w(
+      unknown_scroll mystical_scroll
+      summoning_stones shapeshift_stone
+    )
     @statistics = sprints.statistics
   end
 end

@@ -1,0 +1,32 @@
+<h3>Miscelleneous Drops</h3>
+<table id="log-compare-table-miscelleneous" class="logtable table table-striped table-bordered" style='display: table'>
+  <thead>
+    <tr>
+      <th rowspan="2">Stage</th>
+      <th rowspan="2">Runs</th>
+      <% drops.each do |name| %>
+        <td colspan="2"><%= name.to_s.titleize %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <% drops.each do |name| %><td>#</td><td>%</td><% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @statistics.each do |scenario, data| %>
+      <tr>
+        <%# <% if data[:totals][:rewards][drop.titleize].blank? %1> %>
+          <th><%= scenario.to_s %></th>
+          <th><%= number_with_delimiter(data[:totals][:runs]) %></th>
+
+          <% drops.each do |drop| %>
+            <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize].try(:[], 0).try(:[], :count)) %></td>
+            <td><%= number_to_percentage(data[:totals][:rewards][drop.titleize].try(:[], 0).try(:[], :average), precision: 2) %></td>
+          <% end %>
+          <%# <% end %1> %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
