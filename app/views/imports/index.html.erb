@@ -28,10 +28,10 @@
     <tbody>
       <%= content_tag_for(:tr, @imports) do |import| %>
         <td><%= import.user %></td>
+        <td><%= import.total %></td>
         <td><%= import.saved %></td>
         <td><%= import.existing %></td>
         <td><%= import.faulty %></td>
-        <td><%= import.total %></td>
         <td><%= time_ago_in_words(import.created_at) %> ago</td>
         <%# <td><%= link_to 'Show', import %1></td> %>
         <%# <td><%= link_to 'Edit', edit_import_path(import) %1></td> %>
