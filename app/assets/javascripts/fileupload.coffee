@@ -34,25 +34,29 @@ ready = ->
       message += "The file you need to upload will be named as:<br/>"
       message += "<strong>&lt;your_sw_user_id&gt;-runs.csv</strong>"
       $(".dz-default.dz-message span").html message
+      $('.container-fluid').prepend(html) if $(".alert").length < 1
 
       @on 'addedfile', (file) =>
         getIcon(file, @files[@files.length - 1].previewElement)
-        $('.alert').slideUp('fast')
+        $('.alert').removeClass('alert-danger alert-success').addClass('alert-warning')
+        $('.alert').html(button + "Importing runs...")
+
       @on 'success', (file, message) =>
-        $('.container-fluid').prepend(html) if $(".alert").length < 1
-        $('.alert').removeClass('alert-danger').addClass('alert-success')
         html  = button + "#{message.total} Runs Imported Successfully!<br/>"
         html += "#{message.saved} saved, while #{message.existing} runs were already imported."
         html += " Failed to import #{message.faulty} runs!<br/>"
         html += "Redirecting you to view logs in about 5 seconds!"
+
+        $('.alert').removeClass('alert-danger alert-warning').addClass('alert-success')
         $('.alert').html(html).show('slow')
-        setTimeout (-> window.location = '/logs'), 5000
+        # setTimeout (-> window.location = '/logs'), 5000
+
       @on 'error', (file, message) ->
-        $('.container-fluid').prepend(html) if $(".alert").length < 1
-        $('.alert').removeClass('alert-success').addClass('alert-danger')
         html  = button + "File could not be imported!<br/>"
         html += "Are you sure this is a valid CSV exported by SWProxy RunLogger?<br/>"
         html += "Error encountered: #{message.error}"
+
+        $('.alert').removeClass('alert-success alert-warning').addClass('alert-danger')
         $('.alert').html(html).show('slow')
         window.location = '/users/sign_in' if file.xhr.status is 401
 
