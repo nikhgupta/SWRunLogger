@@ -14,20 +14,29 @@ class CsvImportingService
       return { "error" => "#{e.class}: #{e.message}" }
     end
 
+    saved = errors = existing = 0
+    total = data.count
+    @import = @user.imports.create total: total
+
     data.map do |sprint|
       sprint = sprint.map{|k,v| [k.parameterize("_").to_sym, v]}
       sprint = OpenStruct.new Hash[sprint]
       sprint.user_id = @user.id
       sprint.digest = Digest::MD5.hexdigest sprint.to_s
-      next if Sprint.where(digest: sprint.digest).exists?
-
-      begin
-        ActiveRecord::Base.transaction{ result = import_sprint sprint }
-      rescue RuntimeError => e
-        Rails.logger.warn "[ERROR]: #{e.message}"
+      if Sprint.where(digest: sprint.digest).exists?
+        existing += 1
+      else
+        begin
+          ActiveRecord::Base.transaction{ result = import_sprint sprint }
+          saved += 1
+        rescue RuntimeError => e
+          Rails.logger.warn "[ERROR]: #{e.message}"
+          errors += 1
+        end
       end
     end
-    nil
+
+    @import.update_attributes(saved: saved, faulty: errors, existing: existing)
   end
 
   private
@@ -93,7 +102,7 @@ class CsvImportingService
     started_at = Time.parse data.date
 
     { win: win, time_taken: time_taken, started_at: started_at,
-      digest: data.digest, user_id: data.user_id }
+      digest: data.digest, import_id: @import.id }
   end
 
   def extract_scenario_parameters(dungeon)

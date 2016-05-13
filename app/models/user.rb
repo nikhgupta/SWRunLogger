@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :sprints
+  has_many :imports
+  has_many :sprints, through: :imports
   has_many :rewards, through: :sprints
   has_many :runes, through: :rewards
 

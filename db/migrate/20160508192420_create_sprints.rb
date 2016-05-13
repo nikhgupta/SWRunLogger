@@ -1,7 +1,7 @@
 class CreateSprints < ActiveRecord::Migration
   def change
     create_table :sprints do |t|
-      t.references :user, index: true, foreign_key: true
+      t.references :import, index: true, foreign_key: true
       t.references :scenario, index: true, foreign_key: true
 
       t.string :digest, limit: 32

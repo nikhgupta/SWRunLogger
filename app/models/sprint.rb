@@ -1,11 +1,12 @@
 class Sprint < ActiveRecord::Base
-  belongs_to :user
   belongs_to :scenario
 
   has_one :reward
   has_one :rune, through: :reward
 
   validates :digest, uniqueness: true
+
+  delegate :user, to: :import
 
   def to_s
     "#{scenario} @ #{started_at}"

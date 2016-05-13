@@ -16,6 +16,18 @@ ActiveRecord::Schema.define(version: 20160508192426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "imports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "saved"
+    t.integer  "faulty"
+    t.integer  "existing"
+    t.integer  "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "imports", ["user_id"], name: "index_imports_on_user_id", using: :btree
+
   create_table "rewards", force: :cascade do |t|
     t.integer  "sprint_id"
     t.string   "type"
@@ -59,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160508192426) do
   end
 
   create_table "sprints", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "import_id"
     t.integer  "scenario_id"
     t.string   "digest",      limit: 32
     t.boolean  "win"
@@ -69,8 +81,8 @@ ActiveRecord::Schema.define(version: 20160508192426) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "sprints", ["import_id"], name: "index_sprints_on_import_id", using: :btree
   add_index "sprints", ["scenario_id"], name: "index_sprints_on_scenario_id", using: :btree
-  add_index "sprints", ["user_id"], name: "index_sprints_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -95,8 +107,9 @@ ActiveRecord::Schema.define(version: 20160508192426) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "imports", "users"
   add_foreign_key "rewards", "sprints"
   add_foreign_key "runes", "rewards"
+  add_foreign_key "sprints", "imports"
   add_foreign_key "sprints", "scenarios"
-  add_foreign_key "sprints", "users"
 end
