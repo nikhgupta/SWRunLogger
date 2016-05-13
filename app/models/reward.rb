@@ -2,6 +2,7 @@ class Reward < ActiveRecord::Base
   self.inheritance_column = false
 
   validates :sprint_id, uniqueness: true
+  validates :type, presence: true
 
   belongs_to :sprint
   has_one :rune
@@ -22,12 +23,12 @@ class Reward < ActiveRecord::Base
   end
 
   def name
-    if level > 0 && amount > 1
+    if level.to_i > 0 && amount.to_i > 1
       "#{level}* #{type.titleize} x#{amount}"
-    elsif level > 0
+    elsif level.to_i > 0
       "#{level}* #{type.titleize}"
     else
-      "#{type.titleize} x#{amount}"
+      "#{type.to_s.titleize} x#{amount}"
     end
   end
 end

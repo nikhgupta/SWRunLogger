@@ -24,7 +24,7 @@ class CsvImportingService
       begin
         ActiveRecord::Base.transaction{ result = import_sprint sprint }
       rescue RuntimeError => e
-        logger.warn "[ERROR]: #{e.message}"
+        Rails.logger.warn "[ERROR]: #{e.message}"
       end
     end
     nil
@@ -75,6 +75,8 @@ class CsvImportingService
       type, level, amount = match[1], 0, match[2].to_i
     elsif data.drop.downcase == "rune"
       type, level, amount = "Rune", data[:rune_grade].to_i, 1
+    elsif data.drop =~ /^unknown drop/i
+      return {}
     else
       type, level, amount = data.drop, 0, 1
     end
