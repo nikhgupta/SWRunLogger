@@ -11,19 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160508192426) do
+ActiveRecord::Schema.define(version: 20160514081714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "imports", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "saved"
-    t.integer  "faulty"
-    t.integer  "existing"
-    t.integer  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "saved",        default: 0
+    t.integer  "faulty",       default: 0
+    t.integer  "existing",     default: 0
+    t.integer  "total",        default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "path"
+    t.datetime "uploaded_at"
+    t.datetime "processed_at"
   end
 
   add_index "imports", ["user_id"], name: "index_imports_on_user_id", using: :btree
@@ -101,6 +104,7 @@ ActiveRecord::Schema.define(version: 20160508192426) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.boolean  "admin"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

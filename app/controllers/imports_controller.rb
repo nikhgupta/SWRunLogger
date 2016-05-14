@@ -5,29 +5,14 @@ class ImportsController < ApplicationController
     @imports = Import.order(created_at: :desc).all
   end
 
-  # TODO: file can be read just once, and text can be feed to import service
+  # We can add JobID to @import object directly.
   def create
-    copy_uploaded_file current_user, params['file'] if ENV['DEBUG']
-    @import = CsvImportingService.new(file: params['file'], user: current_user).run
+    # @import = current_user.imports.create path: params['file'].tempfile.path
+    job_id  = CsvImporter.perform_async current_user.id, params['file'].tempfile.path
 
-    if @import.persisted?
-      render json: @import.to_json
-    else
-      render json: { error: "Import failed for some unknown reason!" }, status: :bad_request
-    end
-  rescue StandardError => e
-    render json: { error: "#{e.class}: #{e.message}" }, status: :unsupported_media_type
-  end
-
-  private
-
-  def log_file_for(user, file)
-    Rails.root.join("data", "user-#{user.id}-#{Time.now.to_i}-#{file.original_filename}")
-  end
-
-  def copy_uploaded_file(user, file)
-    File.open(log_file_for(user, file), "w") do |f|
-      f.puts File.read(file.tempfile)
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Successfully queued.." }
+      format.json { render json: { job_id: job_id } }
     end
   end
 end

@@ -41,3 +41,9 @@ gem 'momentjs-rails'
 gem 'jquery-datatables-rails'
 
 gem 'postmark-rails', '~> 0.12.0'
+
+gem 'sidekiq'
+gem 'sidekiq-status'
+gem 'sinatra', require: false
+
+gem 'github_api'

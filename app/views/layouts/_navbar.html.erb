@@ -1,0 +1,35 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "SWarLogs", "/", class: "navbar-brand" %>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= menu_item_link "Home", root_path %>
+        <%= menu_item_link "Logs", logs_path %>
+        <%= menu_item_link "Compare", compare_logs_path %>
+        <%= menu_item_link "Imports", imports_path %>
+        <li><a>|</a></li>
+        <li><%= link_to "SWARFARM", "http://swarfarm.com", target: "_blank" %></li>
+        <li><%= link_to "Optimizer", "http://swrunes.all.my", target: "_blank" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <li><%= link_to "Monitor", sidekiq_path if current_user.admin? %></li>
+          <%= menu_item_link "Profile", edit_user_registration_path %>
+          <%= menu_item_link "Logout", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= menu_item_link "Login", new_user_session_path %>
+          <%= menu_item_link "Register", new_user_registration_path %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+

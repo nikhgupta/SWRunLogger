@@ -1,14 +1,30 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
-  get  "/logs" => "logs#index", as: :logs
-  get  "/compare" => "logs#compare", as: :compare
-
-  get  "/imports" => "imports#index",  as: :imports
-  post "/imports" => 'imports#create', as: :new_import
+  post 'monitor/status' => "services#job_status",
+    defaults: { format: :json }, constraints: { format: :json }
 
   devise_for :users
-  # root to: "logs#index", as: :logs
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/monitor', as: :sidekiq
+  end
+
   root to: "high_voltage/pages#show", id: "home"
+
+  resources :imports, only: [:index, :create]
+
+  resources :logs, only: :index do
+    collection do
+      get 'compare'
+    end
+  end
+
+  # get  "/logs"    => "logs#index",   as: :logs
+  # get  "/compare" => "logs#compare", as: :compare
+  # get  "/imports" => "imports#index",  as: :imports
+  # post "/imports" => 'imports#create', as: :new_import
+  # root to: "logs#index", as: :logs
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

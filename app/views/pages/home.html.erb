@@ -1,18 +1,11 @@
 <% if current_user.present? %>
-  <div class="row">
-    <div class='col-sm-4'>
-      <%= form_tag new_import_path, class: "dropzone", id: "import-dropzone",
-        multipart: true, authenticity_token: true, remote: true, multiple: true do %>
-        <div class="fallback">
-          <%= file_field_tag :files, multiple: true %><br>
-          <%= submit_tag "Upload" %>
-        </div>
-      <% end %>
+  <%= form_tag Import.new, class: "dropzone", id: "import-dropzone",
+    multipart: true, authenticity_token: true, remote: true, multiple: true do %>
+    <div class="fallback">
+      <%= file_field_tag :files, multiple: true %><br>
+      <%= submit_tag "Upload" %>
     </div>
-    <div class="col-sm-8">
-      <%= render partial: "pages/welcome" %>
-    </div>
-  </div>
-<% else %>
-  <%= render partial: "pages/welcome" %>
+  <% end %>
 <% end %>
+<%= render partial: "pages/welcome" %>
+<%= render partial: "pages/imports" %>

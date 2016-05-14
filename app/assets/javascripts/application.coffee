@@ -16,4 +16,8 @@
 #= require bootstrap
 #= require fileupload
 #= require datatables
+#= require_self
 #= require_tree .
+
+$ ->
+  $(".btn.reload").on 'click', -> location.reload()

@@ -1,5 +1,6 @@
 class Sprint < ActiveRecord::Base
   belongs_to :scenario
+  belongs_to :import
 
   has_one :reward
   has_one :rune, through: :reward

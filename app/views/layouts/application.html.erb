@@ -17,49 +17,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-  <%= render "layouts/analytics" %>
+  <%= render partial: "layouts/analytics" %>
 </head>
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <%= link_to "SWarLogs", "/", class: "navbar-brand" %>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class='<%= :active if request.path == root_path %>'><%= link_to "Home", root_path %></li>
-          <li class='<%= :active if request.path == logs_path %>'><%= link_to "Logs", logs_path %></li>
-          <li class='<%= :active if request.path == compare_path %>'><%= link_to "Compare", compare_path %></li>
-          <li class='<%= :active if request.path == imports_path %>'><%= link_to "Imports", imports_path %></li>
-          <li><a>|</a></li>
-          <li><%= link_to "SWARFARM", "http://swarfarm.com", target: "_blank" %></li>
-          <li><%= link_to "Optimizer", "http://swrunes.all.my", target: "_blank" %></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <% if current_user %>
-            <li><%= link_to "Profile", edit_user_registration_path %></li>
-            <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <li class='<%= :active if request.path == new_user_session_path %>'><%= link_to "Login", new_user_session_path %></li>
-            <li class='<%= :active if request.path == new_user_registration_path %>'><%= link_to "Register", new_user_registration_path %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <%= render partial: "layouts/navbar" %>
   <div class="container-fluid">
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do %>
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <%= msg %>
-      <% end %>
-    <% end %>
+    <%= render partial: "layouts/flashes" %>
 
     <%= yield %>
   </div>
