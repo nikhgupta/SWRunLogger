@@ -6,7 +6,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th>User</th>
+        <th>User ID</th>
         <th>Total Runs</th>
         <th>Runs Saved</th>
         <th>Existing Rows</th>
@@ -27,7 +27,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @imports) do |import| %>
-        <td><%= import.user %></td>
+        <td><%= import.user.id %></td>
         <td><%= import.total %></td>
         <td><%= import.saved %></td>
         <td><%= import.existing %></td>
