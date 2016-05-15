@@ -1,0 +1,42 @@
+<div id='reports-loading' class="col-xs-10 col-xs-offset-1" data-job-id="<%= @job_id %>">
+  <h4>Generating report.. Please, wait for a moment..</h4>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-warning active" role="progressbar" id="progress-report" aria-valuenow="0" aria-valuemin="10" aria-valuemax="100" style="width: 10%;"></div>
+  </div>
+</div>
+
+<% if @data.present? %>
+  <div id='reports-comparison' class='reports-area hidden'>
+    <div class="col-xs-2">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs tabs-left" role="tablist">
+        <% @tabs.values.flatten.each_with_index do |tab, i| %>
+          <li role="presentation" class="<%= :active if i == 0 %>">
+            <a href="#<%= tab %>" aria-controls="<%= tab %>" role="tab"
+              data-toggle="tab"><%= tab.titleize %></a>
+          </li>
+        <% end %>
+        <li role="presentation">
+          <a href="#miscelleneous" aria-controls="miscelleneous" role="tab"
+            data-toggle="tab">Scrolls/Stones</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="col-xs-10">
+      <div class="tab-content" style='margin-top: 20px'>
+        <% @tabs.each do |kind, names| %>
+          <% names.each_with_index do |name, i| %>
+            <div role="tabpanel" class="tab-pane <%= :active if i == 0 && kind == :runes %>" id="<%= name %>">
+              <%= render partial: "reports/comparison/#{kind}.html.erb", locals: { drop: name, tabs: @tabs } %>
+            </div>
+          <% end %>
+          <div role="tabpanel" class="tab-pane" id="miscelleneous">
+            <%= render partial: "reports/comparison/miscelleneous.html.erb", locals: { drops: @miscelleneous } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

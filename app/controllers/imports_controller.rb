@@ -7,7 +7,6 @@ class ImportsController < ApplicationController
 
   # We can add JobID to @import object directly.
   def create
-    # @import = current_user.imports.create path: params['file'].tempfile.path
     job_id  = CsvImporter.perform_async current_user.id, params['file'].tempfile.path
 
     respond_to do |format|

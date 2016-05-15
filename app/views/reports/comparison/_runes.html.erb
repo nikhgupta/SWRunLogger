@@ -25,17 +25,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @statistics.each do |scenario, data| %>
-      <% next if data[:totals][:rewards][drop.titleize].blank? %>
+    <% @data.each do |scenario, data| %>
+      <% next if data['totals']['rewards'][drop.titleize].blank? %>
       <tr>
         <th><%= scenario.to_s %></th>
-        <th><%= number_with_delimiter(data[:totals][:runs]) %></th>
+        <th><%= number_with_delimiter(data['totals']['runs']) %></th>
 
         <% 3.times.each do |i| %>
-          <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize][6-i].try(:[], :count)) %></td>
-          <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize][6-i].try(:[], :value)) %></td>
-          <td><%= number_to_percentage(data[:totals][:rewards][drop.titleize][6-i].try(:[], :efficiency), precision: 2) %></td>
-          <td><%= number_to_percentage(data[:totals][:rewards][drop.titleize][6-i].try(:[], :average), precision: 2) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'count')) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'value')) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'efficiency'), precision: 2) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'average'), precision: 2) %></td>
         <% end %>
       </tr>
     <% end %>
@@ -71,17 +71,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @statistics.each do |scenario, data| %>
-      <% next if data[:totals][:rewards][drop.titleize].blank? %>
+    <% @data.each do |scenario, data| %>
+      <% next if data['totals']['rewards'][drop.titleize].blank? %>
       <tr>
         <th><%= scenario.to_s %></th>
-        <th><%= number_with_delimiter(data[:totals][:runs]) %>
+        <th><%= number_with_delimiter(data['totals']['runs']) %>
 
         <% 3.times.each do |i| %>
-          <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize][3-i].try(:[], :count)) %></td>
-          <td><%= number_with_delimiter(data[:totals][:rewards][drop.titleize][3-i].try(:[], :value)) %></td>
-          <td><%= number_to_percentage(data[:totals][:rewards][drop.titleize][3-i].try(:[], :efficiency), precision: 2) %></td>
-          <td><%= number_to_percentage(data[:totals][:rewards][drop.titleize][3-i].try(:[], :average), precision: 2) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'count')) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'value')) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'efficiency'), precision: 2) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'average'), precision: 2) %></td>
         <% end %>
       </tr>
     <% end %>

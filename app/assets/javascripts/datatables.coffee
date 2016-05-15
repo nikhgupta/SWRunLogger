@@ -4,7 +4,7 @@
 #= require datetime-moment
 #= require_self
 #= require logs/index
-#= require logs/compare
+#= require reports/comparison
 
 String::toHHMMSS = ->
   sec_num = parseInt(this, 10)

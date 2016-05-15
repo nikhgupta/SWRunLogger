@@ -1,23 +1,6 @@
 #= require dropzone
 #= require status_poller
-
-class @ProgressBar
-  constructor: (element) -> @bar = $(element)
-  currentProgress: -> @bar.attr("aria-valuenow") * 1
-  increment: -> @setProgress(@currentProgress() + 1)
-  hasStarted: -> @currentProgress() > 0
-  isComplete: -> @currentProgress() == 100
-  isIncomplete: -> @currentProgress() < 100
-  setProgress: (amount) ->
-    @bar.width("#{amount}%").attr("aria-valuenow", amount)
-    @bar.html("#{amount}%") unless @bar.html() is ""
-  markCompleted: ->
-    @setProgress(100)
-    @bar.removeClass('active')
-  markFailed: ->
-    @setProgress(100)
-    @bar.removeClass('progress-bar-info progress-bar-success progress-bar-warning')
-    @bar.addClass('progress-bar-danger')
+#= require progress_bar
 
 ready = ->
   Dropzone.autoDiscover = false
@@ -72,7 +55,7 @@ ready = ->
       @on 'success', (file, message) =>
         new StatusPoller().getJobStatus message.job_id, (response) ->
           if response.percent?
-            migrationBar.html("0%") if migrationBar.html() is ""
+            migrationBar.bar.html("0%") if migrationBar.bar.html() is ""
             migrationBar.setProgress(response.percent)
 
           if response.status is "Queued"
@@ -82,9 +65,11 @@ ready = ->
             parseBar.increment()
           else if response.status is "Complete"
             [bar.markCompleted() for bar in [queueBar, parseBar, migrationBar]]
-            message  = "<br/>Imported #{response.saved} runs from a total of #{response.total} runs.<br/>"
-            message += "#{response.existing} runs were already present in our database, while #{response.faulty} runs had inconsistent data!"
-            $("p.title-migration").append(message)
+            message  = "Imported #{response.saved} runs from a total of #{response.total} runs in the uploaded file.<br/>"
+            message += "#{response.existing} runs were skipped, as they were already present in our database.<br/>" if response.existing * 1 > 0
+            message += "#{response.faulty} runs were skipped, as they had inconsistent/wrong/unparseable data!" if response.faulty * 1 > 0
+            $(".modal-title").html("Import Successful!")
+            $(".title-migration").append("<p>#{message}</p>")
             $(".continue-import").removeClass('hidden')
           else if response.status is "Failed"
             [bar.markFailed() for bar in [queueBar, parseBar, uploadBar, migrationBar]]
@@ -100,7 +85,7 @@ ready = ->
               uploadBar.markFailed() if response.status is "Failed"
 
               html = " <strong><a href='#{response.github_url}' target=\'_blank\''>View</a></strong>"
-              $("p.title-upload").append(html) if response.github_url?
+              $(".title-upload p").append(html) if response.github_url?
 
 
       @on 'error', (file, message) ->

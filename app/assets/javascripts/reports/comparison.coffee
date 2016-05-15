@@ -1,5 +1,5 @@
 ready = ->
-  $('#compare-tables ul.nav a').click (e) ->
+  $('#reports-comparison ul.nav a').click (e) ->
     e.preventDefault()
     $(@).tab 'show'
 
@@ -7,7 +7,7 @@ ready = ->
     window.location.hash = e.target.hash
     scrollTo 0, 0
     html = $(@).parent().remove()
-    $("#compare-tables ul.nav-tabs.tabs-left").prepend(html)
+    $("#reports-comparison ul.nav-tabs.tabs-left").prepend(html)
 
     $.fn.dataTable.tables(
       visible: true
@@ -20,9 +20,9 @@ ready = ->
     initComplete: ->
       $(".logtable").css("visibility", "visible")
 
-  if window.location.hash? && $("#compare-tables").length > 0
+  if window.location.hash? && $("#reports-comparison").length > 0
     hash = window.location.hash.substring(1)
-    $("#compare-tables ul.nav a[href='##{hash}']").tab 'show'
+    $("#reports-comparison ul.nav a[href='##{hash}']").tab 'show'
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

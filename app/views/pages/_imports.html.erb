@@ -3,34 +3,32 @@
     <div class="modal-dialog modal-lg vertical-align-center">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Import Progress</h4>
+          <h4 class="modal-title">Import in Progress</h4>
         </div>
         <div class="modal-body">
-          <p class='title-queue'>Waiting for Queue...</p>
+          <p class="alert alert-danger error-description hidden">The CSV file you uploaded could not be imported for some reason. <br/> Please, try uploading it again. </p>
+
+          <div class='title-queue'><p>Waiting for Queue...</p></div>
           <div class="progress">
             <div class="progress-bar progress-bar-striped active" role="progressbar" id="progress-queue" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
           </div>
 
-          <p class='title-parse'>Processing Data File...</p>
+          <div class='title-parse'><p>Processing Data File...</p></div>
           <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-success active" role="progressbar" id="progress-parse" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
           </div>
 
-          <p class='title-upload'>Uploading Data File...</p>
+          <div class='title-upload'><p>Uploading Data File...</p></div>
           <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-info active" role="progressbar" id="progress-upload" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
           </div>
 
-          <p class='title-migration'>Parsing and Saving Runs...</p>
+          <div class='title-migration'><p>Parsing and Saving Runs...</p></div>
           <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-warning active" role="progressbar" id="progress-migration" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
           </div>
 
-          <div class='error-description hidden'>
-            <p>The CSV file you uploaded could not be imported for some reason. <br/> Please, try uploading it again. </p>
-            <button class="btn btn-info reload" type="submit">Retry Uploading</button>
-          </div>
-
+          <button class="btn btn-info reload error-description hidden" type="submit">Retry Uploading</button>
           <button class="btn btn-success continue-import hidden" type="submit">Continue</button></div>
       </div>
     </div>

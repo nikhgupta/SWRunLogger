@@ -9,6 +9,7 @@
   background-color: #efefef;
 }
 .imports-progress.modal {
-  // button.continue-import { display: none; }
-  // p.error-description { display: none; }
+  .title-queue, .title-parse, .title-upload, .title-migration {
+    p:first-child { font-weight: bold; }
+  }
 }
