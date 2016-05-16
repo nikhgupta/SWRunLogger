@@ -14,10 +14,15 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require bootstrap
-#= require_self
 #= require_tree .
+#= require_self
 
-$ ->
-  $(".btn.reload").on   'click', -> location.reload()
+ready = ->
+  $(".btn.reload").on 'click', ->
+    location.reload()
+
   $(".btn.continue").on 'click', ->
     window.location = $(@).data("continueUrl")
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

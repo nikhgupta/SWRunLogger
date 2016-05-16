@@ -16,6 +16,12 @@ namespace :sprints do
       Digest::MD5.hexdigest message
     end
 
+    def delete_sprint(sprint)
+      sprint.reward.rune.try(:delete)
+      sprint.reward.try(:delete)
+      sprint.try(:delete)
+    end
+
     seen = []
     sprints = Sprint.includes(:scenario, reward: :rune, import: :user)
     puts "Fixing digests on #{sprints.count} records"
@@ -25,13 +31,12 @@ namespace :sprints do
 
       if seen.include?(digest)
         puts "Found duplicate sprint with ID: #{sprint.id} - DROPPING IT!"
-        sprint.reward.rune.try(:delete)
-        sprint.reward.try(:delete)
-        sprint.try(:delete)
+        delete_sprint sprint
       elsif sprint.digest != digest
         puts "Found invalid digest for sprint with ID: #{sprint.id} - UPDATING IT!"
         seen << digest
         sprint.update_attributes(digest: digest)
+        delete_sprint(sprint) if sprint.errors.key?(:digest)
       end
     end
   end
