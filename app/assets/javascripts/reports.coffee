@@ -1,4 +1,7 @@
-#= require progress_bar
+#= require components/progress_bar
+#= require_self
+#= require reports/logs
+#= require reports/comparison
 
 ready = ->
   loading = $("#reports-loading")
@@ -15,7 +18,7 @@ ready = ->
     new StatusPoller().getJobStatus job_id, (response) ->
       if response.status is "Queued"
         loadBar.increment()
-        loadBar.addClass("progress-bar-info")
+        loadBar.bar.addClass("progress-bar-info")
       else if response.status is "Working"
         loadBar.increment(2)
         loadBar.bar.removeClass('progress-bar-info').addClass('progress-bar-warning')

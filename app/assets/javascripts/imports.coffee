@@ -1,6 +1,6 @@
 #= require dropzone
-#= require status_poller
-#= require progress_bar
+#= require components/status_poller
+#= require components/progress_bar
 
 ready = ->
   Dropzone.autoDiscover = false
@@ -16,8 +16,6 @@ ready = ->
     ).fail(->
       $(elem).find('img').attr('src', fall)
     )
-
-  $(".continue-import").on 'click', -> window.location = "/logs"
 
   $("#import-dropzone").dropzone
     # restrict image size to a maximum 1MB
@@ -50,6 +48,7 @@ ready = ->
       $('.container-fluid').prepend(html) if $(".alert").length < 1
 
       @on 'addedfile', (file) =>
+        debugger
         modalEl.modal backdrop: 'static', keyboard: false
 
       @on 'success', (file, message) =>
@@ -70,7 +69,7 @@ ready = ->
             message += "#{response.faulty} runs were skipped, as they had inconsistent/wrong/unparseable data!" if response.faulty * 1 > 0
             $(".modal-title").html("Import Successful!")
             $(".title-migration").append("<p>#{message}</p>")
-            $(".continue-import").removeClass('hidden')
+            $(".btn.continue").removeClass('hidden')
           else if response.status is "Failed"
             [bar.markFailed() for bar in [queueBar, parseBar, uploadBar, migrationBar]]
             modalEl.find(".modal-title").html("Import Failed - #{response.error}")
@@ -89,7 +88,7 @@ ready = ->
 
 
       @on 'error', (file, message) ->
-        window.location = '/users/sign_in' if file.xhr.status is 401
+        window.location = $(@element).data("loginUrl") if file.xhr.status is 401
 
         [bar.markFailed() for bar in [queueBar, parseBar, uploadBar, migrationBar]]
         modalEl.find(".modal-title").html("Import Failed - File could not be uploaded!")

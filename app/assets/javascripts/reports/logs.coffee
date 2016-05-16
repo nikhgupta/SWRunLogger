@@ -1,11 +1,12 @@
+#= require components/datatables
+
 ready = ->
-  $('#log-index-table').DataTable
+  $('#reports-logs-table').DataTable
     stateSave:      true
     deferRender:    true
     order:          [[1, 'desc']]
-    columnDefs:     [ { sortable: false, targets: -1 } ]
     ajax:
-      url: $("#log-index-table").data("source"),
+      url: $("#reports-logs-table").data("source"),
       dataSrc: ""
       cache: false
     initComplete: ->
@@ -62,4 +63,3 @@ ready = ->
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
-

@@ -1,6 +1,3 @@
-# Functions exposed:
-# - onQueued, onWorking, onComplete, onInterrupted, onExpired
-#
 class @StatusPoller
   constructor: (@options = {}) ->
     @timer = null

@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   root to: "high_voltage/pages#show", id: "home"
 
   resources :imports, only: [:index, :create]
-  resources :logs, only: :index
+  # resources :logs, only: :index
 
+  get "reports/logs" => "reports#logs"
   get "reports/comparison" => "reports#comparison"
 
   # get  "/logs"    => "logs#index",   as: :logs

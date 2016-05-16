@@ -1,0 +1,12 @@
+<div id='reports-loading' class="col-xs-10 col-xs-offset-1" data-job-id="<%= @job_id %>">
+  <h4>Generating report.. Please, wait for a moment..</h4>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-warning active" role="progressbar" id="progress-report" aria-valuenow="0" aria-valuemin="10" aria-valuemax="100" style="width: 10%;"></div>
+  </div>
+</div>
+
+<% if @data.present? %>
+  <div id='reports-<%= action_name %>' class='reports-area hidden'>
+    <%= yield %>
+  </div>
+<% end %>

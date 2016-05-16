@@ -1,0 +1,75 @@
+<%= render layout: 'reports/wrapper' do %>
+  <table id="reports-logs-table" class='logtable' data-source="<%= reports_logs_path(format: :json) %>">
+    <thead>
+      <tr class='main'>
+        <th rowspan="2" class='string primary'>Scenario</th>
+        <th colspan="2">Run Information</th>
+        <th colspan="4">Drops</th>
+        <th colspan="4">Rune</th>
+      </tr>
+      <tr>
+        <td class='datetime counter'>Run at</td>
+        <td class='duration'>Duration</td>
+        <%# <td class='boolean yesno'>Win?</td> %>
+        <td class='numeric int'>Mana</td>
+        <td class='numeric int'>Xtal</td>
+        <td class='numeric int'>Enrgy</td>
+        <td class='string'>Kind</td>
+        <td class='enum string'>Slot</td>
+        <td class='enum string'>Rarity</td>
+        <td class='numeric int'>Value</td>
+        <td class='numeric float percentage'>Efficiency</td>
+        <%# <td class='text'>Details</td> %>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr class='filters'>
+        <th>Scenario</th>
+        <th>Run at</th>
+        <th>Duration</th>
+        <%# <th>Win?</th> %>
+        <th>Mana</th>
+        <th>Xtal</th>
+        <th>Enrgy</th>
+        <th>Kind</th>
+        <th>Slot</th>
+        <th>Rarity</th>
+        <th>Value</th>
+        <th>Efficiency</th>
+        <%# <th>Details</th> %>
+      </tr>
+      <tr class='averages'>
+        <th>Averages:</th>
+        <th class='count'>Run at</th>
+        <th>Duration</th>
+        <%# <th>Win?</th> %>
+        <th>Mana</th>
+        <th>Xtal</th>
+        <th>Enrgy</th>
+        <th>Kind</th>
+        <th>Slot</th>
+        <th>Rarity</th>
+        <th>Value</th>
+        <th>Efficiency</th>
+        <%# <th>Details</th> %>
+      </tr>
+      <tr class='totals'>
+        <th>Totals:</th>
+        <th>Run at</th>
+        <th>Duration</th>
+        <%# <th>Win?</th> %>
+        <th>Mana</th>
+        <th>Xtal</th>
+        <th>Enrgy</th>
+        <th>Kind</th>
+        <th>Slot</th>
+        <th>Rarity</th>
+        <th>Value</th>
+        <th>Efficiency</th>
+        <%# <th>Details</th> %>
+      </tr>
+    </tfoot>
+    <tbody>
+    </tbody>
+</table>
+<% end %>

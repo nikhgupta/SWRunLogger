@@ -14,10 +14,9 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require bootstrap
-#= require fileupload
-#= require datatables
 #= require_self
 #= require_tree .
 
 $ ->
-  $(".btn.reload").on 'click', -> location.reload()
+  $(".btn.reload").on   'click', -> location.reload()
+  $(".btn.continue").on 'click', -> window.location = $(@).data("continueUrl")

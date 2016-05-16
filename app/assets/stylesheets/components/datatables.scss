@@ -2,6 +2,9 @@
  *= require dataTables/jquery.dataTables
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  */
+
+.logtable { visibility: hidden; }
+
 .dataTables_wrapper {
   font-size: 0.9em;
   .dataTables_paginate {
@@ -59,11 +62,6 @@
   &.hard { color: #f60; }
   &.normal { color: #393; }
   &.unknown { color: #333; }
-}
-
-.logtable { visibility: hidden; }
-#log-index-table {
-  min-height: 600px;
 }
 
 // td, th { border: 1px solid; }
