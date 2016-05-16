@@ -21,7 +21,7 @@ module Reporter
         rune_slot: sprint.reward.rune.try(:slot),
         rune_rarity: sprint.reward.rune.try(:rarity),
         rune_value: sprint.reward.rune.try(:sell_value),
-        rune_efficiency: sprint.reward.rune.try(:efficiency).round(2),
+        rune_efficiency: sprint.reward.rune.try(:efficiency),
         # details: "<del style='color: #999'>Soon</del>"
       }
     end
