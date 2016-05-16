@@ -25,6 +25,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-rvm'
   gem 'capistrano-rails'
+  gem 'capistrano-sidekiq'
 end
 
 group :development do

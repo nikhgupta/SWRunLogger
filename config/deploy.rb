@@ -20,11 +20,11 @@ set :format, :pretty
 set :log_level, :info
 
 # Default value for :pty is false
-set :pty, true
+set :pty, false # known bug with capistrano-sidekiq - keep it false!
 
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push(
-  'config/database.yml', 'config/secrets.yml'
+  'config/database.yml', 'config/secrets.yml', 'config/sidekiq.yml'
 )
 
 # Default value for linked_dirs is []
@@ -42,8 +42,13 @@ set :default_env, {
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+# rails
 set :keep_assets, 2
 set :assets_roles, [:web, :app]
+
+# sidekiq
+set :sidekiq_config, File.join(shared_path, "config", "sidekiq.yml")
+set :sidekiq_processes, 1
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
