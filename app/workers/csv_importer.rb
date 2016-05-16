@@ -23,6 +23,8 @@ class CsvImporter
 
     counts.each{|key, value| store key => value }
     @import.update_attributes(counts.merge(uploaded_at: Time.now))
+
+    @user.invalidate_cache!
   rescue StandardError => e
     message = "Invalid file imported! Is this, really, a CSV file?"
     message = "#{e.class}: #{e.message}" unless e.is_a?(CSV::MalformedCSVError)
@@ -40,7 +42,6 @@ class CsvImporter
 
   def add_sprint(*args)
     SprintImporter.new.perform(*args)
-    # SprintImporter.perform_in_batch(*args)
   end
 
   def upload_csv_to_github

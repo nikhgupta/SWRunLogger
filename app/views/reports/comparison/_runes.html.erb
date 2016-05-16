@@ -32,10 +32,10 @@
         <th><%= number_with_delimiter(data['totals']['runs']) %></th>
 
         <% 3.times.each do |i| %>
-          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'count')) %></td>
-          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'value')) %></td>
-          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'efficiency'), precision: 2) %></td>
-          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][6-i].try(:[], 'average'), precision: 2) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][(6-i).to_s].try(:[], 'count')) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][(6-i).to_s].try(:[], 'value')) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][(6-i).to_s].try(:[], 'efficiency'), precision: 2) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][(6-i).to_s].try(:[], 'average'), precision: 2) %></td>
         <% end %>
       </tr>
     <% end %>
@@ -78,10 +78,10 @@
         <th><%= number_with_delimiter(data['totals']['runs']) %>
 
         <% 3.times.each do |i| %>
-          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'count')) %></td>
-          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'value')) %></td>
-          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'efficiency'), precision: 2) %></td>
-          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][3-i].try(:[], 'average'), precision: 2) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][(3-i).to_s].try(:[], 'count')) %></td>
+          <td><%= number_with_delimiter(data['totals']['rewards'][drop.titleize][(3-i).to_s].try(:[], 'value')) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][(3-i).to_s].try(:[], 'efficiency'), precision: 2) %></td>
+          <td><%= number_to_percentage(data['totals']['rewards'][drop.titleize][(3-i).to_s].try(:[], 'average'), precision: 2) %></td>
         <% end %>
       </tr>
     <% end %>

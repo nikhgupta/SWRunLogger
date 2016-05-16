@@ -48,7 +48,6 @@ ready = ->
       $('.container-fluid').prepend(html) if $(".alert").length < 1
 
       @on 'addedfile', (file) =>
-        debugger
         modalEl.modal backdrop: 'static', keyboard: false
 
       @on 'success', (file, message) =>
@@ -79,7 +78,7 @@ ready = ->
             new StatusPoller().getJobStatus response.upload_job_id, (response) ->
               uploadBar.setProgress(20)  if response.status is "Queued"
               uploadBar.setProgress(50) if response.status is "Working" and uploadBar.currentProgress() < 50
-              uploadBar.increment() if uploadBar.currentProgress() > 50
+              uploadBar.increment(5) if uploadBar.currentProgress() > 50
               uploadBar.markCompleted() if response.status is "Complete"
               uploadBar.markFailed() if response.status is "Failed"
 

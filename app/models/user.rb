@@ -12,4 +12,11 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  def invalidate_cache!
+    cache  = Rails.root.join "data", "reports"
+    files  = Dir.glob(cache.join("**",  "#{id}.json"))
+    files << Dir.glob(cache.join("**", "global.json"))
+    files.flatten.uniq.map{|file| File.unlink file}
+  end
 end

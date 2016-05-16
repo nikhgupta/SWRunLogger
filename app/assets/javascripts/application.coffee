@@ -19,4 +19,5 @@
 
 $ ->
   $(".btn.reload").on   'click', -> location.reload()
-  $(".btn.continue").on 'click', -> window.location = $(@).data("continueUrl")
+  $(".btn.continue").on 'click', ->
+    window.location = $(@).data("continueUrl")
