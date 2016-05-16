@@ -1,4 +1,14 @@
 <%= render layout: 'reports/wrapper' do %>
+  <% if current_user.blank? %>
+    <p class='alert alert-warning'>
+      Due to a really large number of records uploaded to the server, the corresponding dataset is slow to load.<br/>
+      It may take a while to load this dataset. Please, hang on!<br/><br/>
+
+      In future, I will be replacing these logs with averages per scenario/dungeon runs.<br/>
+      Or maybe, I will just use a better (but a bit slow server-side) method to present this data.<br/>
+      For logged-in users, this will display all their `runs`, as usual.
+    </p>
+  <% end %>
   <table id="reports-logs-table" class='logtable' data-source="<%= reports_logs_path(format: :json) %>">
     <thead>
       <tr class='main'>

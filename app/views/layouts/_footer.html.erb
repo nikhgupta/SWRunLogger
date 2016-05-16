@@ -1,0 +1,18 @@
+<% if request.path == root_path %>
+  <footer class="footer navbar navbar-bottom">
+    <div class="container">
+      <div class="row">
+        <div class='col-sm-6'>
+          <p class='text-muted'>&copy; 2016 ALL RIGHTS RESERVED - <%= link_to "nikhgupta", "https://github.com/nikhgupta" %></p>
+        </div>
+        <div class='col-sm-6 text-right'>
+          <p class='text-muted'>
+            <% file = Rails.root.join("REVISION"); commit = file.read if file.exist? %>
+            on commit: <%= commit.blank? ? "development" :
+              link_to(commit[0,8], "https://github.com/nikhgupta/swarlogs/tree/#{commit}", target: "_blank") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+<% end %>
