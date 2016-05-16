@@ -2,7 +2,6 @@
 
 ready = ->
   $('#reports-logs-table').DataTable
-    stateSave:      true
     deferRender:    true
     order:          [[1, 'desc']]
     ajax:
