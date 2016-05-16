@@ -12,7 +12,7 @@ class CsvImporter
     total @csv.count
 
     @import = @user.imports.create path: path
-    upload_csv_to_github
+    upload_csv_to_github if Rails.env.production?
 
     @csv = @csv.each_with_index.map do |row, i|
       at i+1; add_sprint @import.id, row

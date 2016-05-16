@@ -35,8 +35,17 @@ class SprintImporter
   end
 
   def add_digest_to_sprint_data
-    @data.user_id = @import.user.id
-    @data.digest = Digest::MD5.hexdigest @data.to_s.inspect
+    message  = @data.mana
+    message += @data.crystal
+    message += @data.energy
+    message += "-"
+    message += Time.parse(@data.date).to_i.to_s
+    message += "-"
+    message += @data.dungeon.downcase.gsub(/[^a-z0-9]/, '')
+    message += (@data.result.downcase == "win" ? "win" : "lost")
+    message += "-"
+    message += @import.user.id.to_s
+    @data.digest = Digest::MD5.hexdigest message
   end
 
   def sprint_exists?
